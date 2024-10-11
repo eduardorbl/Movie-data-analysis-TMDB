@@ -1,4 +1,5 @@
 .venv/
-movie_data.csv
+venv/
 .env
+data
 __pycache__/

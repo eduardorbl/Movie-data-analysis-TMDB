@@ -86,7 +86,7 @@ df[['vote_average', 'vote_count', 'popularity']] = df[['vote_average', 'vote_cou
 df['title'] = df['title'].str.strip().str.lower()
 
 # Save the data to a CSV file
-df.to_csv("movie_data.csv", index=False)
+df.to_csv("./data/movie_data.csv", index=False)
 
 # View the first records
 print(df.head())
