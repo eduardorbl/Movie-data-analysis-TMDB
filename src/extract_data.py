@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-api_key = os.getenv("TMDB_API_KEY")
+api_key = os.getenv("TMDB_API_KEY") # Get the API key from the environment variables
 
 # Base URL of the API
 base_url = "https://api.themoviedb.org/3/discover/movie"
