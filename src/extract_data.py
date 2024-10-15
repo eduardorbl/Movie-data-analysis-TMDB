@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-api_key = os.getenv("TMDB_API_KEY") # Get the API key from the environment variables
+api_key = os.getenv("TMDB_API_KEY")  # Get the API key from environment variables
 
 # Base URL of the API
 base_url = "https://api.themoviedb.org/3/discover/movie"
@@ -14,7 +14,7 @@ headers = {
     "Authorization": f"Bearer {api_key}"
 }
 
-# Parameters
+# Request parameters
 params = {
     "include_adult": "false",
     "include_video": "false",
@@ -23,11 +23,11 @@ params = {
     "page": 1
 }
 
-# List to store data
+# List to store the data
 data_list = []
 
 # Total number of pages to be read
-total_pages = 30  # Set the total number of pages you want to read
+total_pages = 100
 
 # Loop to collect data from multiple pages
 for page in range(1, total_pages + 1):
@@ -67,16 +67,11 @@ df = pd.DataFrame(data_list)
 # Remove duplicate records
 df.drop_duplicates(subset='id', inplace=True)
 
-# Handling missing values
-df.isnull().sum()  # Check how many null values exist in each column
-
-# Fill null values with a default value, for example:
+# Handle missing values
 df['overview'].fillna('N/A', inplace=True)
-
-# Or remove records with many null values:
 df.dropna(subset=['release_date', 'vote_average'], inplace=True)
 
-# Convert the 'release_date' column to date type
+# Convert the 'release_date' column to datetime type
 df['release_date'] = pd.to_datetime(df['release_date'], errors='coerce')
 
 # Convert numeric columns to numeric type
@@ -88,5 +83,5 @@ df['title'] = df['title'].str.strip().str.lower()
 # Save the data to a CSV file
 df.to_csv("./data/movie_data.csv", index=False)
 
-# View the first records
+# Display the first records
 print(df.head())
